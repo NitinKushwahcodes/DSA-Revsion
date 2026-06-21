@@ -5,13 +5,13 @@ public:
         int max_sum = 0;
         int st = 0;
         int end = 0;
-        unordered_map<int, int>mp;
+        unordered_set<int>s;
         while(end < nums.size()){
-            while(mp.find(nums[end]) != mp.end()){
+            while(s.find(nums[end]) != s.end()){
                 sum -= nums[st];
-                mp.erase(nums[st++]);
+                s.erase(nums[st++]);
             }
-            mp[nums[end]]++;
+            s.insert(nums[end]);
             sum +=  nums[end++] ;
             max_sum = max(max_sum, sum);
         }
