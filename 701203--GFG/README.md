@@ -1,0 +1,2 @@
+# [](https://www.geeksforgeeks.org/problems/equilibrium-point-1587115620/1)
+## 
