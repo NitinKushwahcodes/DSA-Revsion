@@ -11,10 +11,11 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* prev = NULL;
         ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* nxt = head;
         while(curr != NULL){
-            ListNode* nxt = curr->next;
+            nxt = curr->next;
             curr->next = prev;
             prev = curr;
             curr = nxt;
@@ -22,3 +23,7 @@ public:
         return prev;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
