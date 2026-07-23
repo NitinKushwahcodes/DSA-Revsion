@@ -1,0 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int sizeOfLL(ListNode* head){
+        ListNode* temp = head;
+        int count = 0;
+        while(temp != NULL){
+            temp = temp->next;
+            count++;
+        }
+        return count;
+    }
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        n = sizeOfLL(head)-n+1;
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* temp = dummy;
+        for(int i=0; i<n-1; i++){
+            temp = temp->next;
+        }
+        temp->next = temp->next->next;
+        return dummy->next;
+    }
+};
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
