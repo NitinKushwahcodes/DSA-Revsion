@@ -11,28 +11,25 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        if(head == NULL || head->next == NULL) {
-            return head;
-        }
-
-        ListNode* dummy = new ListNode(0);
+        ListNode* dummy = new ListNode(-1);
         dummy->next = head;
-
         ListNode* prev = dummy;
-
-        while(prev->next != NULL && prev->next->next != NULL) {
-            ListNode* first = prev->next;
-            ListNode* second = first->next;
-
-            // swapping
-            first->next = second->next;
-            second->next = first;
+        ListNode* first = NULL;
+        ListNode* second = NULL;
+        ListNode* nxt = NULL;
+        while(prev->next != NULL && prev->next->next != NULL){
+            first = prev->next;
+            second = first->next;
+            nxt = second->next;
             prev->next = second;
-
-            // move prev
+            second->next = first;
+            first->next = nxt;
             prev = first;
         }
-
         return dummy->next;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
