@@ -14,36 +14,55 @@ class Solution {
   public:
     Node* segregate(Node* head) {
         // code here
-        int zero = 0;
-        int one = 0;
-        int two = 0;
+        Node* zeroHead = new Node(-1);
+        Node* oneHead  = new Node(-1);
+        Node* twoHead  = new Node(-1);
+
+        Node* zero = zeroHead;
+        Node* one  = oneHead;
+        Node* two  = twoHead;
+        
         Node* curr = head;
         while(curr){
-            int val = curr->data;
-            if(val == 0) zero++;
-            else if(val == 1) one++;
-            else two++;
-            curr = curr->next;
-        }
-        int n = zero+one+two;
-        Node* dummy = new Node(0);
-        Node* t = dummy;
-        for(int i=0; i<n; i++){
-            if(i<zero){
-                Node* temp = new Node(0);
-                t->next = temp;
+            Node* nxt = curr->next;
+            curr->next = nullptr;
+            if(curr->data == 0){
+                zero->next = curr;
+                zero = zero->next;
             }
-            else if(i<zero+one){
-                Node* temp = new Node(1);
-                t->next = temp;
+            else if(curr->data == 1){
+                one->next = curr;
+                one = one->next;
             }
             else{
-                Node* temp = new Node(2);
-                t->next = temp;
+                two->next = curr;
+                two = two->next;
             }
-            t = t->next;
+            curr = nxt;
         }
-        return dummy->next;
+        Node* head0 = zeroHead->next;
+        Node* head1 = oneHead->next;
+        Node* head2 = twoHead->next;
+        if(head0 == nullptr){
+            if(head1 == nullptr){
+                return head2;
+            }
+            else{
+                one->next = head2;
+                return head1;
+            }
+        }
+        else{
+            if(head1 == nullptr){
+                zero->next = head2;
+                return head0;
+            }
+            else{
+                zero->next = head1;
+                one->next = head2;
+                return head0;
+            }
+        }
     }
 };
 
