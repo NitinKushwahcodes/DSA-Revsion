@@ -13,18 +13,24 @@ class Node
 
 class Solution {
   public:
-    void buildTree(vector<int>&ans, Node* root){
-        if(root == NULL){
-            return;
-        }
-        ans.push_back(root->data);
-        buildTree(ans, root->left);
-        buildTree(ans, root->right);
-    }
+    
     vector<int> preOrder(Node* root) {
         // code here
         vector<int>ans;
-        buildTree(ans, root);
+        if(root == NULL) return ans;
+        stack<Node*>st;
+        st.push(root);
+        while(!st.empty()){
+            Node* curr = st.top();
+            st.pop();
+            ans.push_back(curr->data);
+            if(curr->right){
+                st.push(curr->right);
+            }
+            if(curr->left){
+                st.push(curr->left);
+            }
+        }
         return ans;
     }
 };
